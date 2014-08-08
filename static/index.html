@@ -3,6 +3,7 @@
 	<head>
 		<link rel="stylesheet" type="text/css" href="css/common.css" />
 		<link rel="stylesheet" type="text/css" href="css/main.css" />
+		<link rel="stylesheet" type="text/css" href="css/jukebox.css" />
 		<script src="/socket.io/socket.io.js"></script>
 		<script>
 
@@ -11,71 +12,86 @@
 		<link id="favicon" rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 	</head>
 <body>
-	<header id="top-control">
+	<div id="body">
+		<header id="top-control">
 
-		<img  id="master-mute" class="mute-button" src="svg/mute_off.svg" />
-		<div id="master-volume" class="volume-bar" /><img src="images/popover_vol_scrubber_normal.png" /></div>
-		<div id="player-volumes-container">
-			<div id="player-volumes" class="loading"></div>
-		</div>
-		<div id="controls">
-			<img id="prev" src="svg/prev.svg" />
-			<img id="play-pause" src="svg/pause.svg" />
-			<img id="next" src="svg/next.svg" />
+			<img id="master-mute" class="mute-button" src="svg/mute_off.svg" />
+			<div id="master-volume" class="volume-bar" /><img src="images/popover_vol_scrubber_normal.png" /></div>
+			<div id="player-volumes-container">
+				<div id="player-volumes" class="loading"></div>
+			</div>
+			<div id="controls">
+				<img id="prev" src="svg/prev.svg" />
+				<img id="play-pause" src="svg/pause.svg" />
+				<img id="next" src="svg/next.svg" />
 
-		</div>
-		<div id="position-info">
-			<img class="left" src="images/tc_progress_container_left.png" />
-			<img class="right" src="images/tc_progress_container_right.png" />
-			<div class="content">
-				<img id="repeat" class="playback-mode" src="images/tc_progress_repeat_normal_off.png" />
-				<img id="shuffle"  class="playback-mode" src="images/tc_progress_shuffle_normal_off.png" />
-				<img id="crossfade"  class="playback-mode" src="images/tc_progress_crossfade_normal_off.png" />
-				<span id="countup">0:00</span>
-					<div id="position-info-control">
-						<div id="position-bar">
-							<div id="position-bar-scrubber"></div>
+			</div>
+			<div id="position-info">
+				<img class="left" src="images/tc_progress_container_left.png" />
+				<img class="right" src="images/tc_progress_container_right.png" />
+				<div class="content">
+					<img id="repeat" class="playback-mode" src="images/tc_progress_repeat_normal_off.png" />
+					<img id="shuffle"  class="playback-mode" src="images/tc_progress_shuffle_normal_off.png" />
+					<img id="crossfade"  class="playback-mode" src="images/tc_progress_crossfade_normal_off.png" />
+					<span id="countup">0:00</span>
+						<div id="position-info-control">
+							<div id="position-bar">
+								<div id="position-bar-scrubber"></div>
+							</div>
 						</div>
-					</div>
-				<span id="countdown">-0:00</span>
-			</div>
-
-		</div>
-	</header>
-	<div id="column-container">
-		<div id="zone-container">
-			<h4>ROOMS</h4>
-			<div id="zone-wrapper"></div>
-		</div>
-		<div id="status-container">
-			<h4 id="now-playing">NOW PLAYING</h4>
-			<div id="current-track-info">
-				<img id="current-track-art" />
-				<div>
-					<h6>Track</h6>
-					<p id="track"></p>
-					<h6>Artist</h6>
-					<p id="artist"></p>
-					<h6>Album</h6>
-					<p id="album"></p>
+					<span id="countdown">-0:00</span>
 				</div>
-				<h5>Next</h5>
-				<p id="next-track"></p>
 			</div>
+			<img id="party-mode" class="mute-button" src="svg/mute_on.svg" />
+		</header>
+		<div id="column-container">
+			<div id="zone-container">
+				<h4><span class="h4-inner">ROOMS</span></h4>
+				<div id="zone-wrapper"></div>
+			</div>
+			<div id="status-container">
+				<h4 id="now-playing"><span class="h4-inner">NOW PLAYING</span></h4>
+				<div id="current-track-info">
+					<img id="current-track-art" />
+					<div>
+						<h6>Track</h6>
+						<p id="track"></p>
+						<h6>Artist</h6>
+						<p id="artist"></p>
+						<h6>Album</h6>
+						<p id="album"></p>
+					</div>
+					<h5>Next</h5>
+					<p id="next-track"></p>
+				</div>
 
-			<h4 id="queue">QUEUE</h4>
-			<ul id="queue-container">
-			</ul>
+				<h4 id="queue"><span class="h4-inner">QUEUE <span id="queueInUseText"></span><span class="infoHeading" id="queueSizeText"></span></span></h4>
+				<ul id="queue-container">
+				</ul>
 
+			</div>
+			<div id="music-sources-container">
+				<!--
+				<h4>FAVORITES</h4>
+				<ul id="favorites-container"></ul>
+				-->
+				<h4>
+					<a id="library-back" class="library-button-back" href='#'></a>
+					<a id="library-music" class="library-button-music hidden" href='#'><span><p>MUSIC</p></span></a>
+					<span class="h4-inner">MUSIC LIBRARY<span id="music-library-headertext"></span></span>
+
+				</h4>
+				<ul id="music-library-container">
+					<!--
+					<li data-title="Artists" data-type="ROOT" data-search="A:ALBUMARTIST" tabindex="1"><img src="images/browse_generic_folder.png"><span>Artists</span></li>
+					<li data-title="Albums" data-type="ROOT" data-search="A:ALBUM" tabindex="1"><img src="images/browse_generic_folder.png"><span>Albums</span></li>
+					<li data-title="Tracks" data-type="ROOT" data-search="A:TRACKS" tabindex="1"><img src="images/browse_generic_folder.png"><span>Tracks</span></li>
+					-->	
+				</ul>
+				<div id="music-library-pager" class="hidden"><p class="blue-button" id="music-library-page-prev">Prev page</p><p class="blue-button" id="music-library-page-next">Next page</p></div>
+			</div>
 		</div>
-		<div id="music-sources-container">
-			<h4>FAVORITES</h4>
-
-			<ul id="favorites-container"></ul>
-
-		</div>
-	</div>
-
+	</div><!-- body -->
 	<script src="js/socket.js"></script>
 	<script src="js/sonos.js"></script>
 	<script src="js/gui-events.js"></script>

@@ -1,5 +1,14 @@
-Sonos Web Controller
-====================
+Sonos Web Controller (this fork)
+================================
+
+This is a fork of jishi's node-sonos-web-controller with specific extensions for use in a kiosk style Jukebox.
+However as with jishi's base project, this is still in the very early stages!
+Many thanks to jishi for doing all the hard work with the Sonos interaction.
+
+
+Sonos Web Controller (original)
+===============================
+
 
 NOTE! THIS IS A WORK IN PROGRESS! This is a really early alpha. Things might break from time to time, until I settle a final release that I consider stable for daily use. Until then only master branch will exist.
 

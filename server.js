@@ -116,7 +116,7 @@ socketServer.sockets.on('connection', function (socket) {
 
   socket.emit('topology-change', players);
   player.getFavorites(function (success, favorites) {
-    socket.emit('favorites', favorites);
+    //socket.emit('favorites', favorites);
   });
 
   socket.on('transport-state', function (data) {
@@ -124,7 +124,6 @@ socketServer.sockets.on('connection', function (socket) {
     var player = discovery.getPlayerByUUID(data.uuid);
 
     if (!player) return;
-
     // invoke action
     //console.log(data)
     player[data.state]();
@@ -161,6 +160,16 @@ socketServer.sockets.on('connection', function (socket) {
 
     player.replaceWithFavorite(data.favorite, function (success) {
       if (success) player.play();
+    });
+  });
+
+  socket.on('queue-track', function(data) {
+    console.log(data);
+    var player = discovery.getPlayerByUUID(data.uuid);
+    if (!player) return;
+
+    player.addPlaylistToQueue(data.uri, false, function (success) {
+      
     });
   });
 
@@ -212,6 +221,13 @@ socketServer.sockets.on('connection', function (socket) {
     player.trackSeek(data.elapsed);
   });
 
+  socket.on('search-library', function(data) {
+    var player = discovery.getPlayerByUUID(data.uuid);
+    player.getMusicLibraryWithSearch(data.search, function(success, library) {
+      socket.emit('music-library', library);
+    });
+  });
+
 
   socket.on("error", function (e) {
     console.log(e);
@@ -228,7 +244,9 @@ discovery.on('topology-change', function (data) {
 });
 
 discovery.on('transport-state', function (data) {
+  console.log('emitting transport-state');
   socketServer.sockets.emit('transport-state', data);
+  console.log(data);
 });
 
 discovery.on('group-volume', function (data) {

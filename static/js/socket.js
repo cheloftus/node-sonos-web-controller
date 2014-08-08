@@ -65,6 +65,10 @@ Socket.socket.on('favorites', function (data) {
 	if (Socket.favoritesChanged instanceof Function) Socket.favoritesChanged(data);
 });
 
+Socket.socket.on('music-library', function (data) {
+	if (Socket.musicLibraryChanged instanceof Function) Socket.musicLibraryChanged(data);
+});
+
 Socket.socket.on('queue', function (data) {
 	if (Socket.queueChanged instanceof Function) Socket.queueChanged(data);
 });

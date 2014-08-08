@@ -41,5 +41,12 @@ var GUI = {
 		var desiredElapsed = Math.round(player.state.currentTrack.duration * position);
 		player.state.elapsedTime = desiredElapsed;
 		Socket.socket.emit('track-seek', {uuid: player.uuid, elapsed: desiredElapsed});
-	})
+	}),
+	partyMode: false,
+	musicLibrary: {
+		breadcrumbs: [],	//keeps track of library navigation (e.g. Artist -> Album -> Track)
+		currentFilter: null,
+		isLoading: false
+	},
+	userInteractionTimeout: null
 };
