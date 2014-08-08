@@ -1,0 +1,47 @@
+/* Party mode overrides */
+
+#party-mode {
+	position: absolute;
+	top: 24px;
+	right: 10px;
+}
+
+#body.party-mode {
+	/* These are specific to my setup! */
+	margin-top: 30px;
+	margin-left: 10px;
+	margin-right: 10px;
+	margin-bottom: 20px;
+}
+
+#column-container.party-mode {
+	height: 850px;
+}
+
+#column-container.party-mode #zone-container {
+	display: none;
+}
+
+#column-container.party-mode #music-sources-container {
+	width: 59.5%;
+	height: 100%;
+	float: right;
+}
+
+#column-container.party-mode #status-container {
+	width: 40%;
+	height: 100%;
+}
+
+#top-control.party-mode #master-volume {
+	display: none;
+}
+
+#top-control.party-mode .mute-button {
+	display: none;
+}
+
+#column-container.party-mode ul#music-library-container {
+	overflow-y: scroll; /* old browser :( */
+	height: 680px;
+}
